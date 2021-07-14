@@ -1,5 +1,6 @@
 package com.example.handleError.service;
 
+import com.example.handleError.dto.PostData;
 import com.example.handleError.entity.Post;
 import com.example.handleError.entity.PostRepository;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ public class PostService {
         this.postRepository = postRepository;
     }
 
-    public List<Post> list() {
-        return postRepository.findAll();
+    public List<PostData> list() {
+        return PostData.of(postRepository.findAll());
     }
 }

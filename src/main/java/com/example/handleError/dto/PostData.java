@@ -4,6 +4,8 @@ import com.example.handleError.entity.Post;
 import lombok.Builder;
 
 import javax.validation.constraints.NotBlank;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class PostData {
     private Long id;
@@ -39,6 +41,12 @@ public class PostData {
                 .title(post.getTitle())
                 .content(post.getContent())
                 .build();
+    }
+
+    public static List<PostData> of(List<Post> postList){
+        return postList.stream()
+                .map(post -> PostData.of(post))
+                .collect(Collectors.toList());
     }
 }
 
