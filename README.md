@@ -17,4 +17,7 @@
 - JPA
 - AssertJ
 
+## 상황 부여
+- lombok은 builder에만 적용한다.
+
 
