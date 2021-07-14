@@ -44,7 +44,7 @@ class PostServiceTest {
         @Test
         @DisplayName("모든 Post를 리턴한다.")
         void It_return_allPost(){
-            List<Post> postList = postService.list();
+            List<PostData> postList = postService.list();
             assertThat(postList.get(0).getId()).isEqualTo(1L);
         }
     }
