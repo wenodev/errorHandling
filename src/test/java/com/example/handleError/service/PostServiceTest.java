@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
 
@@ -23,9 +25,9 @@ class PostServiceTest {
         @Test
         @DisplayName("모든 Post를 리턴한다.")
         void It_return_allPost(){
+            given(postRepository.findAll()).willReturn(List.of(new Post(1L, "test-title", "test-content")));
             List<Post> postList = postService.list();
+            assertThat(postList.get(0).getId()).isEqualTo(1L);
         }
-
     }
-
 }
