@@ -6,6 +6,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.mockito.Mockito.mock;
 
 
@@ -21,7 +23,7 @@ class PostServiceTest {
         @Test
         @DisplayName("모든 Post를 리턴한다.")
         void It_return_allPost(){
-            Post post = postService.list();
+            List<Post> postList = postService.list();
         }
 
     }

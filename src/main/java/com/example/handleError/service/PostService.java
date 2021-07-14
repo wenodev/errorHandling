@@ -5,6 +5,7 @@ import com.example.handleError.entity.PostRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Transactional
 @Service
@@ -15,7 +16,7 @@ public class PostService {
         this.postRepository = postRepository;
     }
 
-    public Post list() {
+    public List<Post> list() {
         return null;
     }
 }
