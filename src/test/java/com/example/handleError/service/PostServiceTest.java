@@ -1,5 +1,6 @@
 package com.example.handleError.service;
 
+import com.example.handleError.dto.PostData;
 import com.example.handleError.entity.Post;
 import com.example.handleError.entity.PostRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,7 +24,13 @@ class PostServiceTest {
     private final Long EXISTED_ID = 1L;
     private final String EXISTED_TITLE = "existed-title";
     private final String EXISTED_CONTENT = "existed-content";
-    private final Post EXISTED_POST = new Post(EXISTED_ID, EXISTED_TITLE, EXISTED_CONTENT);
+    private final Post EXISTED_POST = Post.builder()
+            .id(EXISTED_ID)
+            .title(EXISTED_TITLE)
+            .content(EXISTED_CONTENT)
+            .build();
+
+    private final PostData EXISTED_POST_DATA = PostData.of(EXISTED_POST);
 
     @Nested
     @DisplayName("list 메소드는")

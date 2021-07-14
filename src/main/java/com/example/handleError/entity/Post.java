@@ -1,5 +1,7 @@
 package com.example.handleError.entity;
 
+import lombok.Builder;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,6 +23,7 @@ public class Post {
 
     public Post() {}
 
+    @Builder
     public Post(Long id, String title, String content) {
         this.id = id;
         this.title = title;
