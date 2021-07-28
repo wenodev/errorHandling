@@ -2,6 +2,7 @@ package com.example.handleError.controller;
 
 import com.example.handleError.dto.PostData;
 import com.example.handleError.service.PostService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -46,9 +47,14 @@ class PostControllerTest {
         private final static String createTitle = "CREATE_TITLE";
         private final static String createContent = "CREATE_CONTENT";
 
-        PostData postData = PostData.builder()
+        PostData validPostData = PostData.builder()
                 .title(createTitle)
                 .content(createContent)
+                .build();
+
+        PostData invalidPostData = PostData.builder()
+                .title("")
+                .content("")
                 .build();
 
         @Nested
@@ -59,8 +65,21 @@ class PostControllerTest {
             void it_returns_save_postData_and_return() throws Exception {
                 mockMvc.perform(post("/post/create")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(mapper.writeValueAsString(postData)))
+                        .content(mapper.writeValueAsString(validPostData)))
                         .andExpect(status().isCreated());
+            }
+        }
+
+        @Nested
+        @DisplayName("만약 title과 content가 존재하지 않는다면")
+        class Contest_with_not_existed_title_and_content{
+            @Test
+            @DisplayName("어떤 에러 발생?")
+            void it_returns_뭐징() throws Exception {
+                mockMvc.perform(post("/post/create")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(mapper.writeValueAsString(invalidPostData)))
+                        .andExpect(status().isBadRequest());
             }
         }
     }
