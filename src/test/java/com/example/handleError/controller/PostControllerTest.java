@@ -12,6 +12,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(PostController.class)
@@ -55,7 +56,7 @@ class PostControllerTest {
             @Test
             @DisplayName("주어진 postData를 저장하고 리턴한다.")
             void it_returns_save_postData_and_return() throws Exception {
-                mockMvc.perform(get("/post/create")
+                mockMvc.perform(post("/post/create")
                         .content(mapper.writeValueAsString(postData)))
                         .andExpect(status().isCreated());
             }
