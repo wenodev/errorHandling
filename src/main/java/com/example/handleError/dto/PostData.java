@@ -2,31 +2,21 @@ package com.example.handleError.dto;
 
 import com.example.handleError.entity.Post;
 import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@NoArgsConstructor
+@Getter
 public class PostData {
     private Long id;
     @NotBlank
     private String title;
     @NotBlank
     private String content;
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public PostData() {}
 
     @Builder
     public PostData(Long id, @NotBlank String title, @NotBlank String content) {
