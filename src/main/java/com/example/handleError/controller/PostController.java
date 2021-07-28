@@ -22,7 +22,7 @@ public class PostController {
         this.postService = postService;
     }
 
-    @GetMapping("list")
+    @GetMapping("/list")
     public List<PostData> list(){
         return postService.list();
     }
