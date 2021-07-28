@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -57,6 +58,7 @@ class PostControllerTest {
             @DisplayName("주어진 postData를 저장하고 리턴한다.")
             void it_returns_save_postData_and_return() throws Exception {
                 mockMvc.perform(post("/post/create")
+                        .contentType(MediaType.APPLICATION_JSON)
                         .content(mapper.writeValueAsString(postData)))
                         .andExpect(status().isCreated());
             }
