@@ -13,13 +13,15 @@ import java.util.stream.Collectors;
 @Getter
 public class PostData {
     private Long id;
-    @NotBlank
+
+    @NotBlank(message = "title은 필수값 입니다.")
     private String title;
-    @NotBlank
+
+    @NotBlank(message = "content은 필수값 입니다.")
     private String content;
 
     @Builder
-    public PostData(Long id, @NotBlank String title, @NotBlank String content) {
+    public PostData(Long id, String title, String content) {
         this.id = id;
         this.title = title;
         this.content = content;
