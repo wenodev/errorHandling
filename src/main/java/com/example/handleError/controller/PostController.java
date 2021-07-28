@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RequestMapping("/post")
@@ -29,7 +30,8 @@ public class PostController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/create")
-    public List<PostData> create(@RequestBody PostData postData){
-        return null;
+    public List<PostData> create(@Valid @RequestBody PostData postData){
+        return List.of(PostData.builder()
+                .build());
     }
 }
