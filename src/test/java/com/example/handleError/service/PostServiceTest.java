@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
@@ -56,21 +57,23 @@ class PostServiceTest {
         private final Long NEW_ID = 2L;
         private final String NEW_TITLE = "new-title";
         private final String NEW_CONTENT = "new-content";
+
         private final PostData NEW_POST_DATA = PostData.builder()
                 .id(NEW_ID)
                 .title(NEW_TITLE)
                 .content(NEW_CONTENT)
                 .build();
 
+        @BeforeEach
+        void setUp(){
+            given(postRepository.save(any(Post.class))).willReturn(PostData.toEntity(NEW_POST_DATA));
+        }
+
         @Test
-        @DisplayName("postdata 저장하고 저장된 post와 201을 리턴한다.")
-        void it_save_postData_returns_post_and_201(){
+        @DisplayName("postdata 저장하고 리턴한다.")
+        void it_save_postData_and_returns_savePostData(){
             PostData postData = postService.create(NEW_POST_DATA);
             assertThat(postData.getTitle()).isEqualTo(NEW_TITLE);
         }
-
     }
-
-
-
 }
