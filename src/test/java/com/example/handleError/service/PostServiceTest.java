@@ -48,4 +48,28 @@ class PostServiceTest {
             assertThat(postList.get(0).getId()).isEqualTo(1L);
         }
     }
+
+    @Nested
+    @DisplayName("create 메소드는")
+    class Describe_create{
+
+        private final Long NEW_ID = 2L;
+        private final String NEW_TITLE = "new-title";
+        private final String NEW_CONTENT = "new-content";
+        private final PostData NEW_POST_DATA = PostData.builder()
+                .id(NEW_ID)
+                .title(NEW_TITLE)
+                .content(NEW_CONTENT)
+                .build();
+
+        @Test
+        @DisplayName("postdata 저장하고 저장된 post와 201을 리턴한다.")
+        void it_save_postData_returns_post_and_201(){
+            Post post = postService.create(PostData.toEntity(NEW_POST_DATA));
+        }
+
+    }
+
+
+
 }
