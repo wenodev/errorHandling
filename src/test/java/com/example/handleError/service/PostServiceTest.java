@@ -65,7 +65,8 @@ class PostServiceTest {
         @Test
         @DisplayName("postdata 저장하고 저장된 post와 201을 리턴한다.")
         void it_save_postData_returns_post_and_201(){
-            Post post = postService.create(PostData.toEntity(NEW_POST_DATA));
+            PostData postData = postService.create(NEW_POST_DATA);
+            assertThat(postData.getTitle()).isEqualTo(NEW_TITLE);
         }
 
     }
