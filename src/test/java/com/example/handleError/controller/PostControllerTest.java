@@ -54,12 +54,12 @@ class PostControllerTest {
     @DisplayName("create 메소드는")
     class Describe_create{
 
-        private final static String createTitle = "CREATE_TITLE";
-        private final static String createContent = "CREATE_CONTENT";
+        private final static String CREATE_TITLE = "create-title";
+        private final static String CREATE_CONTENT = "create-content";
 
         PostData validPostData = PostData.builder()
-                .title(createTitle)
-                .content(createContent)
+                .title(CREATE_TITLE)
+                .content(CREATE_CONTENT)
                 .build();
 
         PostData invalidPostData = PostData.builder()
@@ -82,7 +82,7 @@ class PostControllerTest {
                 mockMvc.perform(post("/post/create")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(mapper.writeValueAsString(validPostData)))
-                        .andExpect(content().string(containsString(createTitle)))
+                        .andExpect(content().string(containsString(CREATE_TITLE)))
                         .andExpect(status().isCreated());
             }
         }
