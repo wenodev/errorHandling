@@ -30,8 +30,7 @@ public class PostController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/create")
-    public List<PostData> create(@Valid @RequestBody PostData postData){
-        return List.of(PostData.builder()
-                .build());
+    public PostData create(@Valid @RequestBody PostData postData){
+        return postService.create(postData);
     }
 }
