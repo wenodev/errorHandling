@@ -40,5 +40,20 @@ public class PostData {
                 .map(post -> PostData.of(post))
                 .collect(Collectors.toList());
     }
+
+    public static Post toEntity(PostData postData){
+        return Post.builder()
+                .id(postData.getId())
+                .title(postData.getTitle())
+                .content(postData.getContent())
+                .build();
+    }
+
+    public static List<Post> toEntity(List<PostData> postDataList){
+        return postDataList.stream()
+                .map(postData -> postData.toEntity(postData))
+                .collect(Collectors.toList());
+    }
+
 }
 
