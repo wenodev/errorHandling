@@ -20,4 +20,9 @@ public class PostService {
     public List<PostData> list() {
         return PostData.of(postRepository.findAll());
     }
+
+    public PostData create(PostData postData) {
+        Post post = postRepository.save(PostData.toEntity(postData));
+        return PostData.of(post);
+    }
 }
