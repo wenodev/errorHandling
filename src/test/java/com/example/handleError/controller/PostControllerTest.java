@@ -1,6 +1,7 @@
 package com.example.handleError.controller;
 
 import com.example.handleError.dto.PostData;
+import com.example.handleError.entity.Post;
 import com.example.handleError.service.PostService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,6 +17,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.filter.CharacterEncodingFilter;
+
+import java.util.List;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.ArgumentMatchers.any;
@@ -39,13 +42,28 @@ class PostControllerTest {
 
     private ObjectMapper mapper = new ObjectMapper();
 
+    private final static String EXISTED_TITLE = "existed-title";
+    private final static String EXISTED_CONTENT = "existed-content";
+
+    private final PostData EXISTED_POST_DATA = PostData.builder()
+            .title(EXISTED_TITLE)
+            .content(EXISTED_CONTENT)
+            .build();
+
     @Nested
     @DisplayName("list 메소드는")
     class Describe_list{
+
+        @BeforeEach
+        void setUp(){
+            given(postService.list()).willReturn(List.of(EXISTED_POST_DATA));
+        }
+
         @Test
         @DisplayName("Post 전체와 200을 리턴한다.")
         void itReturnAllPostAnd200() throws Exception {
             mockMvc.perform(get("/post/list"))
+                    .andExpect(content().string(containsString(EXISTED_TITLE)))
                     .andExpect(status().isOk());
         }
     }
@@ -57,12 +75,12 @@ class PostControllerTest {
         private final static String CREATE_TITLE = "create-title";
         private final static String CREATE_CONTENT = "create-content";
 
-        PostData validPostData = PostData.builder()
+        private final PostData validPostData = PostData.builder()
                 .title(CREATE_TITLE)
                 .content(CREATE_CONTENT)
                 .build();
 
-        PostData invalidPostData = PostData.builder()
+        private final PostData invalidPostData = PostData.builder()
                 .title("")
                 .content("")
                 .build();
