@@ -5,6 +5,7 @@ import com.example.handleError.service.PostService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -17,6 +18,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
 import static org.hamcrest.Matchers.containsString;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -64,6 +67,12 @@ class PostControllerTest {
                 .content("")
                 .build();
 
+        @BeforeEach
+        void setUp(){
+            given(postService.create(any(PostData.class))).willReturn(validPostData);
+        }
+
+
         @Nested
         @DisplayName("만약 title과 content가 존재 한다면")
         class Context_with_existed_title_and_content{
@@ -73,6 +82,7 @@ class PostControllerTest {
                 mockMvc.perform(post("/post/create")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(mapper.writeValueAsString(validPostData)))
+                        .andExpect(content().string(containsString(createTitle)))
                         .andExpect(status().isCreated());
             }
         }
