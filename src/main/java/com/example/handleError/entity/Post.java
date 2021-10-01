@@ -37,7 +37,8 @@ public class Post {
     @Column
     private LocalDateTime createdAt;
 
-    @OneToMany
+    @ToString.Exclude
+    @OneToMany(mappedBy = "post")
     private List<Comment> comments = new ArrayList<>();
 
 }
