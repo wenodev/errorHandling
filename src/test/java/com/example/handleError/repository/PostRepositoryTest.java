@@ -1,5 +1,6 @@
-package com.example.handleError.entity;
+package com.example.handleError.repository;
 
+import com.example.handleError.entity.Post;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

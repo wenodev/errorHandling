@@ -1,5 +1,6 @@
-package com.example.handleError.entity;
+package com.example.handleError.repository;
 
+import com.example.handleError.entity.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDateTime;

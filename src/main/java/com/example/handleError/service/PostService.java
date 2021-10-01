@@ -2,7 +2,7 @@ package com.example.handleError.service;
 
 import com.example.handleError.dto.PostData;
 import com.example.handleError.entity.Post;
-import com.example.handleError.entity.PostRepository;
+import com.example.handleError.repository.PostRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;

@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PrePersist;
 
 @Configuration
 public class QueryDslConfiguration {
