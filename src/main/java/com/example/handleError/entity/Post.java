@@ -11,7 +11,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @ToString
 @Getter
@@ -33,5 +36,8 @@ public class Post {
 
     @Column
     private LocalDateTime createdAt;
+
+    @OneToMany
+    private List<Comment> comments = new ArrayList<>();
 
 }
