@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class ControllerErrorAdvice {
@@ -15,11 +16,8 @@ public class ControllerErrorAdvice {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ErrorResponse handleValidationExceptions(MethodArgumentNotValidException ex) {
-        List<String> errors = new ArrayList<>();
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
-            errors.add(error.getDefaultMessage());
-        });
-        return ErrorResponse.of(errors);
+        return ErrorResponse.of(ex.getBindingResult().getAllErrors().stream().map(error -> error.getDefaultMessage())
+                .collect(Collectors.toList()));
     }
 
 }
